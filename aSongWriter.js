@@ -10,11 +10,14 @@
 
 //Song constructor
 var Song = function () {
-  // timeSig;//varies with complexity 1-3
-  // key;//accepts major, minor, or atonal
+  /*
+  // timeSig//varies with complexity 1-3
+  // key//accepts major, minor, or atonal
   // //this.rhythm;
-  // progression;
+  // progression//accepts starting note (1 recommended) and
+    //length of progression(alternatively call rando (2,10))
   // melody;
+  */
 }
 
 Song.prototype.rando = function (range1, range2) {
@@ -68,20 +71,20 @@ Song.prototype.timeSigGen = function (timeSig) {
   }
 };
 
-Song.prototype.key = function(key) {
+Song.prototype.keyGen = function(key) {
   switch (key) {
     case 'major':
       //major
-      return 'major';
+      this.key = 'major';
       break;
     case 2:
       //minor
-      return 'minor';
+      this.key = 'minor';
        break;
 
     case 3:
-      //complex
-      return 'atonal'
+      //atonal
+      this.key = 'atonal'
       break;
   }
 }
@@ -105,8 +108,15 @@ Song.prototype.key = function(key) {
 */
 
 
-Song.prototype.progression = function(progression) {
-  switch (progression) {
+Song.prototype.progressionGen = function(chord, length) {
+  this.progression = [chord];
+  //recurses through length
+
+  length--;
+  //chooses random next chord based on algorithm
+
+  var nextChord = function(chord) {
+    switch (chord) {
     case 1:
       //simple
       break;
@@ -118,8 +128,8 @@ Song.prototype.progression = function(progression) {
       //complex
       break;
   }
-
-}
+  }
+};
 
 Song.prototype.melody = function(melody) {
   switch (melody) {
@@ -133,7 +143,4 @@ Song.prototype.melody = function(melody) {
       //complex
       break;
     }
-
-
-  }
-}
+};
