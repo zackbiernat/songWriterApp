@@ -10,66 +10,83 @@
 
 //Song constructor
 var Song = function () {
-  this.timeSig;
-  this.key;
-  this.rhythm;
-  this.progression;
-  this.melody;
+  // timeSig;//varies with complexity 1-3
+  // key;//accepts major, minor, or atonal
+  // //this.rhythm;
+  // progression;
+  // melody;
 }
 
 Song.prototype.rando = function (range1, range2) {
   return Math.floor(Math.random() * Math.abs(range2-range1)) + range1;
 }
 
-Song.prototype.timeSig = function (timeSig) {
+Song.prototype.timeSigGen = function (timeSig) {
   var output;
   switch (timeSig) {
     case 1:
       //simple
-      output = rando(0, 2);
+      output = this.rando(0, 2);
       break;
     case 2:
       //less simple
-      output = rando(2, 4);
+      output = this.rando(2, 4);
       break;
 
     case 3:
       //complex
-      output = rando(4, 6);
+      output = this.rando(4, 6);
       break;
+
+      default: console.log('You did not enter a valid value!');
   }
-  console.log(output);
   switch (output) {
     case 0:
-    return '4/4';
+    this.timeSig= '4/4';
+    break;
+
     case 1:
-    return '3/4';
+    this.timeSig= '3/4';
+    break;
+
     case 2:
-    return '6/8';
+    this.timeSig= '6/8';
+    break;
+
     case 3:
-    return '6/4';
+    this.timeSig= '6/4';
+    break;
+
     case 4:
-    return '7/8';
+    this.timeSig= '7/8';
+    break;
+
     case 5:
-    return '5/4';
+    this.timeSig= '5/4';
+    break;
+
+
   }
 }
 
 Song.prototype.key = function(key) {
   switch (key) {
-    case 1:
-      //simple
-      [break;]
+    case 'major':
+      //major
+      return 'major';
+      break;
     case 2:
-      //less simple
-       break;]
+      //minor
+      return 'minor';
+       break;
 
     case 3:
       //complex
-      [break;]
+      return 'atonal'
+      break;
   }
 }
-
+/*
 Song.prototype.rhythm = function(rhythm) {
   switch (rhythm) {
     case 1:
@@ -85,19 +102,20 @@ Song.prototype.rhythm = function(rhythm) {
 
   }
 }
+*/
 
 Song.prototype.progression = function(progression) {
   switch (progression) {
     case 1:
       //simple
-      [break;]
+      break;
     case 2:
       //less simple
-       break;]
+       break;
 
     case 3:
       //complex
-      [break;]
+      break;
 
   }
 
@@ -107,14 +125,14 @@ Song.prototype.melody = function(melody) {
   switch (melody) {
     case 1:
       //simple
-      [break;]
+      break;
     case 2:
       //less simple
-       break;]
+       break;
 
     case 3:
       //complex
-      [break;]
+      break;
 
   }
 }
