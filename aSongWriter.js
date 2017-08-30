@@ -129,7 +129,7 @@ Song.prototype.progressionGen = function(chord, length) {
     length--;
    if (length === 0){
      this.progression.push(this.partOfProgression);
-     this.partOfProgression = [];
+     //this.partOfProgression = [];
      return;
    }
   //chooses random next chord based on algorithm
