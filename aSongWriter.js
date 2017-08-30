@@ -18,11 +18,26 @@ var Song = function () {
     //length of progression(alternatively call rando (2,10))
   // melody;
   */
+  this.partOfProgression = [];
+  this.progression= [];
 }
 
 Song.prototype.rando = function (range1, range2) {
   return Math.floor(Math.random() * Math.abs(range2-range1)) + range1;
-}
+};
+Song.prototype.choose = function (input1, input2, input3, input4) {
+  var choice = this.rando(1, arguments.length+1)
+  switch (choice) {
+    case 1:
+      return input1;
+    case 2:
+      return input2;
+    case 3:
+      return input3;
+    case 4:
+      return input4;
+  }
+};
 
 Song.prototype.timeSigGen = function (timeSig) {
   var output;
@@ -77,7 +92,7 @@ Song.prototype.keyGen = function(key) {
       //major
       this.key = 'major';
       break;
-    case 2:
+    case 'minor':
       //minor
       this.key = 'minor';
        break;
@@ -109,27 +124,35 @@ Song.prototype.keyGen = function(key) {
 
 
 Song.prototype.progressionGen = function(chord, length) {
-  this.progression = [chord];
+  this.partOfProgression.push(chord);
   //recurses through length
-
-  length--;
+    length--;
+   if (length === 0){
+     this.progression.push(this.partOfProgression);
+     this.partOfProgression = [];
+     return;
+   }
   //chooses random next chord based on algorithm
 
-  var nextChord = function(chord) {
+ // var nextChordMaj = function(chord) {
     switch (chord) {
     case 1:
-      //simple
-      break;
+      return this.progressionGen(this.rando(1, 8),length);
     case 2:
-      //less simple
-       break;
-
+      return this.progressionGen(5, length);
     case 3:
-      //complex
-      break;
+      return this.progressionGen(this.choose(4,6), length);//returns 6 or 4
+    case 4:
+      return this.progressionGen(this.choose(1,2,5), length);
+    case 5:
+      return this.progressionGen(this.choose(1,6), length);
+    case 6:
+      return this.progressionGen(this.choose(2,4), length);
+    case 7:
+      return this.progressionGen(this.choose(1,5), length);
   }
-  }
-};
+
+}
 
 Song.prototype.melody = function(melody) {
   switch (melody) {
@@ -144,3 +167,5 @@ Song.prototype.melody = function(melody) {
       break;
     }
 };
+
+var newSong = new Song();
