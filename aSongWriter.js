@@ -129,7 +129,6 @@ Song.prototype.progressionGen = function(chord, length) {
     length--;
    if (length === 0){
      this.progression.push(this.partOfProgression);
-     //this.partOfProgression = [];
      return;
    }
   //chooses random next chord based on algorithm
@@ -154,18 +153,35 @@ Song.prototype.progressionGen = function(chord, length) {
 
 }
 
-Song.prototype.melody = function(melody) {
-  switch (melody) {
+Song.prototype.melody = function() {
+  //should iterate over progression and determine notes for a melody
+  var melody = [];
+  for (var i = 0; i < this.progression; i++) {
+    var pitch = this.progression[i] + (this.choose(0, 2, 4, 7, 9, 11));
+    switch (this.rando(0,9)) {
+    case 0:
+      melody.push(pitch);
     case 1:
-      //simple
-      break;
+      melody.push(pitch, pitch + 1);
     case 2:
-      //less simple
-       break;
+      melody.push(pitch, pitch, pitch +2);
     case 3:
-      //complex
-      break;
+      melody.push(pitch, pitch +2, pitch, pitch -1);
+    case 4:
+      melody.push(pitch -1, pitch);
+    case 5:
+      melody.push(pitch, pitch + 4);
+    case 6:
+      melody.push(pitch, pitch -1, pitch - 2);
+    case 7:
+      meoldy.push(pitch, pitch -3, pitch -2, pitch);
+    case 8:
+      meoldy.push(pitch, pitch -1, pitch);
+    case 9:
+      meoldy.push(pitch, pitch +1, pitch +2);
     }
+  }
+
 };
 
 var newSong = new Song();
